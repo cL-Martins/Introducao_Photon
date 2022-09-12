@@ -495,7 +495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &228588376
 RectTransform:
   m_ObjectHideFlags: 0
@@ -992,7 +992,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -1609,11 +1609,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355aff7adb8eb0c4db8e04f9204c89f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goLogin: {fileID: 228588375}
-  inpPlayerName: {fileID: 181821641}
-  strPlayerName: 
-  goRoom: {fileID: 1007661987}
-  inpRoomName: {fileID: 575437372}
+  _goPnlLogin: {fileID: 228588375}
+  _inpPlayerName: {fileID: 181821641}
+  _strPlayerName: 
+  _myPlayerPrefab: {fileID: 4365790547941938599, guid: fac884dd783bfb34ba55dcfed3f75869, type: 3}
+  _goPnlRoom: {fileID: 1007661987}
+  _inpRoomName: {fileID: 575437372}
 --- !u!4 &1480419112
 Transform:
   m_ObjectHideFlags: 0

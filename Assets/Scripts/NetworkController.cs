@@ -4,43 +4,45 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
+using UnityEditor.VersionControl;
 
 public class NetworkController : MonoBehaviourPunCallbacks
 {
     [Header("Panel Player")]
-    public GameObject goLogin;
-    public InputField inpPlayerName;
-    [HideInInspector] public string strPlayerName;
+    public GameObject _goPnlLogin;
+    public InputField _inpPlayerName;
+    [HideInInspector] public string _strPlayerName;
+    public GameObject _myPlayerPrefab;
 
     [Header("Panel Room")]
-    public GameObject goRoom;
-    public InputField inpRoomName;
+    public GameObject _goPnlRoom;
+    public InputField _inpRoomName;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        strPlayerName = "Player" + Random.Range(100, 999);
-        inpPlayerName.text = strPlayerName;
+        _strPlayerName = "Player" + Random.Range(100, 999);
+        _inpPlayerName.text = _strPlayerName;
 
-        inpRoomName.text = "Room" + Random.Range(100, 999);
+        _inpRoomName.text = "Room" + Random.Range(100, 999);
 
-        goLogin.gameObject.SetActive(true);
-        goRoom.gameObject.SetActive(false);
+        _goPnlLogin.gameObject.SetActive(true);
+        _goPnlRoom.gameObject.SetActive(false);
     }
 
     public void BtnLogin()
     {
-        if (inpPlayerName.text != "")
+        if (_inpPlayerName.text != "")
         {
-            PhotonNetwork.NickName = inpPlayerName.text;
+            PhotonNetwork.NickName = _inpPlayerName.text;
         }
         else
         {
-            PhotonNetwork.NickName = strPlayerName;
+            PhotonNetwork.NickName = _strPlayerName;
         }
         PhotonNetwork.ConnectUsingSettings();
-        goLogin.gameObject.SetActive(false);
+        _goPnlLogin.gameObject.SetActive(false);
     }
 
     public void BtnPartidasRapidas()
@@ -50,9 +52,9 @@ public class NetworkController : MonoBehaviourPunCallbacks
 
     public void BtnCriarSala()
     {
-        string tempStrRoomName = inpRoomName.text;
-        RoomOptions roomOptions = new RoomOptions() { MaxPlayers = 4 };
-        PhotonNetwork.JoinOrCreateRoom(tempStrRoomName, roomOptions, TypedLobby.Default);
+        string _strRoomNameTemp_ = _inpRoomName.text;
+        RoomOptions _roomOptionsTemp_ = new RoomOptions() { MaxPlayers = 4 };
+        PhotonNetwork.JoinOrCreateRoom(_strRoomNameTemp_, _roomOptionsTemp_, TypedLobby.Default);
     }
 
 
@@ -66,7 +68,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
     {
         Debug.Log("OnConnectedToMaster");
         Debug.Log("Server: " + PhotonNetwork.CloudRegion + " Ping: "+ PhotonNetwork.GetPing());
-        goRoom.gameObject.SetActive(true);
+        _goPnlRoom.gameObject.SetActive(true);
 
         //PhotonNetwork.JoinLobby();
     }
@@ -80,8 +82,8 @@ public class NetworkController : MonoBehaviourPunCallbacks
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         Debug.Log("OnJoinRandomFailed");
-        string roomTemp = "Room" + Random.Range(100, 999);
-        PhotonNetwork.CreateRoom(roomTemp);
+        string _roomTemp_ = "Room" + Random.Range(100, 999);
+        PhotonNetwork.CreateRoom(_roomTemp_);
     }
 
     public override void OnJoinedRoom()
@@ -89,6 +91,13 @@ public class NetworkController : MonoBehaviourPunCallbacks
         Debug.Log("OnJoinedRoom");
         Debug.Log("Room Name: " + PhotonNetwork.CurrentRoom.Name);
         Debug.Log("Players in Room: " + PhotonNetwork.CurrentRoom.PlayerCount);
+
+        _goPnlLogin.gameObject.SetActive(false);
+        _goPnlRoom.gameObject.SetActive(false);
+
+        PhotonNetwork.Instantiate(_myPlayerPrefab.name, _myPlayerPrefab.transform.position, _myPlayerPrefab.transform.rotation,0);
+       
+
     }
 
     public override void OnDisconnected(DisconnectCause cause)
