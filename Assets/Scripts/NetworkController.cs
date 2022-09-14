@@ -4,20 +4,20 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
-using UnityEditor.VersionControl;
 
 public class NetworkController : MonoBehaviourPunCallbacks
 {
     [Header("Panel Player")]
+    [HideInInspector] public string _strPlayerName;
     public GameObject _goPnlLogin;
     public InputField _inpPlayerName;
-    [HideInInspector] public string _strPlayerName;
     public GameObject _myPlayerPrefab;
 
     [Header("Panel Room")]
     public GameObject _goPnlRoom;
     public InputField _inpRoomName;
 
+    //------------------------------------------------------------------------------------
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +58,6 @@ public class NetworkController : MonoBehaviourPunCallbacks
     }
 
 
-
     public override void OnConnected()
     {
         Debug.Log("OnConnected");
@@ -96,8 +95,6 @@ public class NetworkController : MonoBehaviourPunCallbacks
         _goPnlRoom.gameObject.SetActive(false);
 
         PhotonNetwork.Instantiate(_myPlayerPrefab.name, _myPlayerPrefab.transform.position, _myPlayerPrefab.transform.rotation,0);
-       
-
     }
 
     public override void OnDisconnected(DisconnectCause cause)

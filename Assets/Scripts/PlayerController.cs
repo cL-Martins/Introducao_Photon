@@ -3,19 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-
-    public float _speed = 5.0f;
+    //public float _speed = 5.0f;
     Rigidbody2D _rbD2_;
     PhotonView _pv_;
+
+    [Header("Player Heath")]
+    public float _playerHeathMax = 100f;
+    float _playerHeathCurrent_;
+    public Image _imgPlayerHealthFill;
+
+    [Header("Bullet")]
+    public GameObject _spawnBulletPosition;
+    public GameObject _objBulletPrefab;
+
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+        HeathManager(_playerHeathMax);
+
+
         _rbD2_ = GetComponent<Rigidbody2D>();
         _pv_ = GetComponent<PhotonView>();
     }
@@ -28,6 +41,12 @@ public class PlayerController : MonoBehaviour
             PlayerMove();
             PlayerTurn();
         }  
+    }
+
+    void HeathManager(float _tempValue_)
+    {
+        _playerHeathCurrent_ += _tempValue_;
+        _imgPlayerHealthFill.fillAmount = _playerHeathCurrent_/100f;
     }
 
     void PlayerMove()
@@ -45,9 +64,20 @@ public class PlayerController : MonoBehaviour
         _mousePositionTemp_ = Camera.main.ScreenToWorldPoint(_mousePositionTemp_);
 
         Vector2 _directionTemp_ = new Vector2( _mousePositionTemp_.x - transform.position.x,
-                                               _mousePositionTemp_.y - transform.position.y  );
+                                               _mousePositionTemp_.y - transform.position.y );
 
         transform.up = _directionTemp_;
+    }
+
+
+    void ClickBulletSpawner()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            PhotonNetwork.Instantiate(_spawnBulletPosition.name, _spawnBulletPosition.transform.position, _spawnBulletPosition.transform.rotation, 0);
+
+        }
+
     }
 
 }
