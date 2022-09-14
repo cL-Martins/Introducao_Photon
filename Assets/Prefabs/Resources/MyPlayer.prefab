@@ -212,6 +212,7 @@ MonoBehaviour:
   _imgPlayerHealthFill: {fileID: 246716819236658492}
   _spawnBulletPosition: {fileID: 5119238753845800263}
   _objBulletPrefab: {fileID: 3884542873302316230, guid: 76ac2a5ce974b1446a609e689c97eb29, type: 3}
+  _obj_Pv_BulletPrefab: {fileID: 3884542873302316230, guid: 2faf30626df249c42aecbdbfe59c5b8d, type: 3}
 --- !u!50 &4365790547941938596
 Rigidbody2D:
   serializedVersion: 4

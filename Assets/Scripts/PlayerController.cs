@@ -19,8 +19,7 @@ public class PlayerController : MonoBehaviour
     [Header("Bullet")]
     public GameObject _spawnBulletPosition;
     public GameObject _objBulletPrefab;
-
-
+    public GameObject _obj_Pv_BulletPrefab;
 
 
     // Start is called before the first frame update
@@ -40,7 +39,13 @@ public class PlayerController : MonoBehaviour
         {
             PlayerMove();
             PlayerTurn();
-        }  
+            ClickBulletSpawner();
+        }
+
+        /*if (Input.GetMouseButtonDown(1))
+        {
+            HeathManager(-10f);
+        }*/
     }
 
     void HeathManager(float _tempValue_)
@@ -74,8 +79,11 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            PhotonNetwork.Instantiate(_spawnBulletPosition.name, _spawnBulletPosition.transform.position, _spawnBulletPosition.transform.rotation, 0);
-
+            Instantiate(_objBulletPrefab, _spawnBulletPosition.transform.position, _spawnBulletPosition.transform.rotation);
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            PhotonNetwork.Instantiate(_obj_Pv_BulletPrefab.name, _spawnBulletPosition.transform.position, _spawnBulletPosition.transform.rotation, 0);
         }
 
     }
