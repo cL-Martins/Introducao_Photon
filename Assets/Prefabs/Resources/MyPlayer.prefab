@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: -4721316625220923309}
   m_Layer: 0
   m_Name: MyPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -208,6 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c3e2cf8c6ba3314ebe66eea6a4bc399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 100
   _playerHeathMax: 100
   _imgPlayerHealthFill: {fileID: 246716819236658492}
   _spawnBulletPosition: {fileID: 5119238753845800263}

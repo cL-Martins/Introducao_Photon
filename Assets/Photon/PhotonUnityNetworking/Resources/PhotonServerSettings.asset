@@ -36,6 +36,8 @@ MonoBehaviour:
   RpcList:
   - ClickRpc
   - DestroyRpc
+  - ShootBulletRPC
+  - TakeDamageRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
